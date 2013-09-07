@@ -8,7 +8,7 @@ use Getopt::Std;
 my $screen = "minecraft";
 
 my %args;
-getopts('s:n:E:M:hSmq', \%args);
+getopts('s:n:E:M:X:hSmq', \%args);
 
 print "Minecraft Command, a command-line screen Minecraft server "
     . "administration tool.\n\n"
@@ -22,11 +22,12 @@ print "Minecraft Command, a command-line screen Minecraft server "
     . "\t-s <message>\t\tSay a message to the server.\n"
     . "\t-S\t\t\tSaves the server map.\n"
     . "\t-q\t\t\tStops the server.\n"
+    . "\t-X <command>\t\tSend a custom command to the screen session.\n"
     . "\t-n <screen name>\tThe screen name that Minecraft is running on\n"
     . "\t\t\t\t(Default is \"minecraft\")\n" and exit if defined $args{h};
 
 print "Use $0 -h for help...\n" and exit unless defined
-    $args{s} or $args{S} or $args{q} or $args{m} or $args{M};
+    $args{s} or $args{S} or $args{q} or $args{m} or $args{M} or $args{X};
 
 #Arguments
 $screen = $args{n} if defined $args{n};
@@ -49,9 +50,11 @@ sub check_mem
 }
 
 print "Memory: " . check_mem() . "KB used...\n" if defined $args{m};
-mine_send("say $args{s}") if defined $args{s} && print "Saying $args{s}...\n";
-mine_send("save-all") if defined $args{S} && print "Saving server...\n";
-mine_send("stop") if defined $args{q} && print "Stopping server...\n";
+mine_send("say $args{s}") if defined $args{s} and print "Saying $args{s}...\n";
+mine_send("save-all") if defined $args{S} and print "Saving server...\n";
+mine_send("stop") if defined $args{q} and print "Stopping server...\n";
+mine_send($args{X}) if defined $args{X} and print
+    "Sending $args{X} to screen session...\n";
 
 if(defined $args{M} and (check_mem() > $args{M})){
     return 1 unless defined $errorcommand;
