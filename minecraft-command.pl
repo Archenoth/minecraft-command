@@ -46,13 +46,13 @@ my $errorcommand = $args{E} if defined $args{E};
 sub create_instance
 {
     (my $jarfile) = @_;
-        print "Created " . (defined $jarfile?"server":"screen")
-	    . " instance on screen: $screen.\n"
-	    if system("screen -S $screen -d "
-		     . (defined $jarfile?"-m java -jar $jarfile"
-			. (defined $args{M}?" -Xmx$args{M} -Xms$args{M}"
-			   :"")
-			:""));
+    print "Created " . (defined $jarfile?"server":"screen")
+	. " instance on screen: $screen.\n"
+	if system("screen -S $screen -d "
+		  . (defined $jarfile?"-m java -jar $jarfile"
+		     . (defined $args{M}?" -Xmx$args{M} -Xms$args{M}"
+			:"")
+		     :""));
 }
 
 #Sends a message to the active screen session.
