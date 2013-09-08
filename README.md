@@ -28,8 +28,7 @@ of the possible command line arguments.
 Example:
 ```
 $ ./minecraft-command.pl -h
-Minecraft Command, a command-line screen Minecraft server
-administration tool.
+Minecraft Command, a command-line screen Minecraft server administration tool.
 
 Usage: ./minecraft-command.pl <arguments>
         -h                      This help screen.
@@ -44,14 +43,15 @@ Usage: ./minecraft-command.pl <arguments>
         -X <command>            Send a custom command to the screen session.
         -n <screen name>        The screen name that Minecraft is running on
                                 (Default is "minecraft")
+        -c <jarfile>            Creates a screen server instance with the jar.
+                                (Uses -n and -M for screen name and memory.)
 $
 ```
 
 #### -E: Error command
-
 The error command is a command that will run only when a parameter
 conditional fails... Currently the command will only run when the memory
-specified by -M is exceeded, but this is soon to be expanded.
+specified by "`-M`" is exceeded, but this is soon to be expanded.
 
 This command does nothing on it's own, so it is an error to run it on
 it's own.
@@ -79,7 +79,7 @@ $
 #### -M: Memory usage status and actions
 This argument accepts a number, which will be the maximum amount of
 bytes that the server can be using before either minecraft-command.pl
-returns an error status for use in shell scripting or the -E command(s)
+returns an error status for use in shell scripting or the "`-E`" command(s)
 will be run (If it is set.)
 
 Example:
@@ -105,7 +105,7 @@ $
 This would send the message "Hello all" to the server for all to see.
 
 #### -S: Saves the server.
-This argument will save the server by running save-all on the screen
+This argument will save the server by running "`save-all`" on the screen
 session.
 
 Example:
@@ -117,7 +117,7 @@ $
 This would save the server.
 
 #### -q: Shuts down the server.
-This will stop the server by sending "stop" to the screen session.
+This will stop the server by sending "`stop`" to the screen session.
 
 Example:
 ```
@@ -162,3 +162,62 @@ $
 This would send the message "Hello all!" for all to see on a minecraft
 server hosted on a screen session called "minecraftserver" as opposed
 to the default.
+
+#### -c: Create a new server instance
+This command will create a new server instance inside of a named
+screen. It will accept parameters for -n and -M to name the screen
+that the new server will be run in, and the amount of memory to
+give to the JVM, respectively. Running it on its own will use the
+default screen name ("minecraft", which is defined at the top of
+minecraft-command.pl.)
+
+This parameter requires the location of the jar file it will use.
+
+If you wanna get more creative, you can just create a new screen with
+"`-C`" and then use "`-X`" to do whatever you need to it.
+
+Example:
+```
+$ ./minecraft-command.pl -c /minecraft/minecraft_server.jar
+Created server instance on screen: minecraft.
+```
+
+This is the most basic way to invoke this parameter. It will create a
+server on a new screen with the default name. This means you could
+communicate with it right away using the other `minecraft-command.pl`
+parameters.
+
+Or if you wanna specify the memory usage and screen name.
+```
+$ ./minecraft-command.pl -c /minecraft/minecraft_server.jar -M1024M -n derp
+Created server instance on screen: derp.
+```
+
+This would start a Minecraft server with the screen name "derp" with
+1024MB allocated memory. You would need to further use "`-n derp`" to
+talk to this server with `minecraft-command.pl`.
+
+If you're curious, this would run the command "`screen -S derp -d -m java -jar /minecraft/minecraft_server.jar -Xmx1024M -Xms1024M`".
+
+#### -C: Create new screen
+This will create a new screen and not do anything with it... You will
+be able to interact with it using the "`-X`" command and after a
+server is started, you can work with it normally.
+
+Example:
+```
+$ ./minecraft-command.pl -C
+Created screen instance on screen: minecraft.
+```
+This is just a vanilla screen that you can do whatever you want
+with... And sine it is the default name, you can interact with it
+using "`-X <command>`" without the need for "`-n`" But if you want to
+run a separate screen, you can specify the name on screen creation
+with the "`-n <name>`" parameter.
+
+```
+$ ./minecraft-command.pl -C -n derp
+Created screen instance on screen: minecraft.
+```
+This would create a new screen that can be interacted with
+"`./minecraft-command.pl -n derp <Whatever>`".

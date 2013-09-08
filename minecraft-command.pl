@@ -8,14 +8,12 @@ use Getopt::Std;
 my $screen = "minecraft";
 
 my %args;
-getopts('c:s:n:E:M:X:hSmq', \%args);
+getopts('c:s:n:E:M:X:hSCmq', \%args);
 
 print "Minecraft Command, a command-line screen Minecraft server "
     . "administration tool.\n\n"
     . "Usage: $0 <arguments>\n"
     . "\t-h\t\t\tThis help screen.\n"
-    . "\t-c <jarfile>\t\tCreates a screen server instance with the jar.\n"
-    . "\t\t\t\t(Uses -n and -M for screen name and memory.)\n"
     . "\t-E <command>\t\tThe command to run in the event of an error.\n"
     . "\t-m\t\t\tDisplays server memory usage\n"
     . "\t-M <max memory (in B)>\tThe process returns an error if the memory\n"
@@ -26,11 +24,15 @@ print "Minecraft Command, a command-line screen Minecraft server "
     . "\t-q\t\t\tStops the server.\n"
     . "\t-X <command>\t\tSend a custom command to the screen session.\n"
     . "\t-n <screen name>\tThe screen name that Minecraft is running on\n"
-    . "\t\t\t\t(Default is \"$screen\")\n" and exit if defined $args{h};
+    . "\t\t\t\t(Default is \"$screen\")\n"
+    . "\t-c <jarfile>\t\tCreates a screen server instance with the jar.\n"
+    . "\t\t\t\t(Uses -n and -M for screen name and memory.)\n"
+    . "\t-C\t\t\tCreates a screen instance. (Uses -n for name.)\n"
+    and exit if defined $args{h};
 
 print "Use $0 -h for help...\n" and exit unless defined
     $args{s} or $args{S} or $args{q} or $args{m} or $args{M} or
-    $args{X} or $args{c};
+    $args{X} or $args{c} or $args{C};
 
 #Arguments
 $screen = $args{n} if defined $args{n};
@@ -44,7 +46,8 @@ my $errorcommand = $args{E} if defined $args{E};
 sub create_instance
 {
     (my $jarfile) = @_;
-        print "Server instance started on screen: $screen.\n"
+        print "Created " . (defined $jarfile?"server":"screen")
+	    . " instance on screen: $screen.\n"
 	    if system("screen -S $screen -d "
 		     . (defined $jarfile?"-m java -jar $jarfile"
 			. (defined $args{M}?" -Xmx$args{M} -Xms$args{M}"
@@ -83,7 +86,7 @@ sub check_mem
     return 0;
 }
 
-create_instance($args{c}) if defined $args{c};
+create_instance($args{c}) if defined $args{c} or defined $args{C};
 print "Memory: " . get_mem() . "B used...\n" if defined $args{m};
 mine_send("say $args{s}") if defined $args{s} and print "Saying $args{s}...\n";
 mine_send("save-all") if defined $args{S} and print "Saving server...\n";
