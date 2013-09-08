@@ -33,7 +33,8 @@ print "Use $0 -h for help...\n" and exit unless defined
 $screen = $args{n} if defined $args{n};
 my $errorcommand = $args{E} if defined $args{E};
 
-#Sends a message to the active screen session. Accepts a string.
+#Sends a message to the active screen session.
+#@parameter $message Message to send.
 sub mine_send
 {
     (my $message) = @_;
@@ -51,14 +52,22 @@ sub get_mem
     return 0;
 }
 
+#Checks to see if the memory exceeds the specified value
+#@parameter $mem The maximum memory before failing.
+sub check_mem
+{
+    (my $mem) = @_;
+    if(get_mem() > $mem){
+	system($errorcommand) if defined $errorcommand;
+	return 1;
+    }
+    return 0;
+}
+
 print "Memory: " . get_mem() . "B used...\n" if defined $args{m};
 mine_send("say $args{s}") if defined $args{s} and print "Saying $args{s}...\n";
 mine_send("save-all") if defined $args{S} and print "Saving server...\n";
 mine_send("stop") if defined $args{q} and print "Stopping server...\n";
 mine_send($args{X}) if defined $args{X} and print
     "Sending $args{X} to screen session...\n";
-
-if(defined $args{M} and (get_mem() > $args{M})){
-    return 1 unless defined $errorcommand;
-    system($errorcommand);
-}
+exit check_mem($args{M}) if defined $args{M};
