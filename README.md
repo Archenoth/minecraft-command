@@ -67,6 +67,7 @@ Usage: ./minecraft-command/minecraft-command.pl <arguments>
         -n <screen name>        The screen name that Minecraft is
 	running on
                                 (Default is "minecraft")
+$
 ```
 
 ### -E: Error command
@@ -83,6 +84,7 @@ Memory: 339976B used...
 $ ./minecraft-command.pl -M 300000 -E "echo The memory exceeds."
 The memory exceeds.
 $ ./minecraft-command.pl -M 400000 -E "echo The memory does not exceed."
+$
 ```
 
 ### -m: Display memory usage
@@ -92,6 +94,7 @@ Example:
 ```
 $ ./minecraft-command.pl -m
 Memory: 339976B used...
+$
 ```
 
 ### -M: Memory usage status and actions
@@ -104,11 +107,10 @@ Example:
 ```
 $ ./minecraft-command.pl -m
 Memory: 339976B used...
-$ ./minecraft-command.pl -M 400000 || echo
- hi
-$ ./minecraft-command.pl -M 300000 || echo
- hi
+$ ./minecraft-command.pl -M 400000 || echo hi
+$ ./minecraft-command.pl -M 300000 || echo hi
 hi
+$
 ```
 
 ### -s: Says the message specified to the server.
@@ -118,6 +120,7 @@ currently on the server.
 Example:
 ```
 $ ./minecraft-command.pl -s "Hello all!"
+$
 ```
 This would send the message "Hello all" to the server for all to see.
 
@@ -128,6 +131,7 @@ session.
 Example:
 ```
 $ ./minecraft-command.pl -S
+$
 ```
 This would save the server.
 
@@ -137,6 +141,7 @@ This will stop the server.
 Example:
 ```
 $ ./minecraft-command.pl -q
+$
 ```
 This would stop the server.
 
@@ -149,12 +154,14 @@ have not yet been implemented in this script.
 Example:
 ```
 $ ./minecraft-command.pl -X "java -jar miencraft-server.jar"
+$
 ```
 This would send the command to the screen session to start the
 minecraft server.
 
 ```
 $ ./minecraft-command.pl -X "say Hello"
+$
 ```
 And this would do the same thing as "`./minecraft-command.pl -s Hello`".
 
@@ -163,9 +170,11 @@ This argument will name the screen session that the script attempts to
 connect to. The default is set the very top of minecraft-command.pl
 (Which is usually "minecraft".). Use this if you wanna connect to a
 minecraft server on a named screen session other than minecraft.
+
 Example:
 ```
 $ ./minecraft-command.pl -s "Hello all!" -n minecraftserver
+$
 ```
 This would send the message "Hello all!" for all to see on a minecraft
 server hosted on a screen session called "minecraftserver" as opposed
