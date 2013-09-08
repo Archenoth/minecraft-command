@@ -48,11 +48,11 @@ sub create_instance
     (my $jarfile) = @_;
     print "Created " . (defined $jarfile?"server":"screen")
 	. " instance on screen: $screen.\n"
-	return system("screen -S $screen -d "
-		      . (defined $jarfile?"-m java -jar $jarfile"
-			 . (defined $args{M}?" -Xmx$args{M} -Xms$args{M}"
-			    :"")
-			 :""));
+	if system("screen -S $screen -d "
+		  . (defined $jarfile?"-m java -jar $jarfile"
+		     . (defined $args{M}?" -Xmx$args{M} -Xms$args{M}"
+			:"")
+		     :""));
 }
 
 #Sends a message to the active screen session.
