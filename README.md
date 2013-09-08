@@ -11,7 +11,7 @@ running in it.
 Usage
 -----
 
-minecraft-command will accept any number of arguments, an will apply
+minecraft-command will accept any number of arguments, and will apply
 their actions in the order specified by the in-script help list. (So,
 if you say `./minecraft-command.pl -q -s "Shutting down server" -S`,
 it will first say the message, then save the server, then quit because
