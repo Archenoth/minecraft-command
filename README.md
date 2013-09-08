@@ -228,7 +228,7 @@ with the "`-n <name>`" parameter.
 *Example:*
 ```
 $ ./minecraft-command.pl -C -n derp
-Created screen instance on screen: minecraft.
+Created screen instance on screen: derp.
 $
 ```
 
