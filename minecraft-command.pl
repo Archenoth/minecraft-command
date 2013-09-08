@@ -8,12 +8,14 @@ use Getopt::Std;
 my $screen = "minecraft";
 
 my %args;
-getopts('s:n:E:M:X:hSmq', \%args);
+getopts('c:s:n:E:M:X:hSmq', \%args);
 
 print "Minecraft Command, a command-line screen Minecraft server "
     . "administration tool.\n\n"
     . "Usage: $0 <arguments>\n"
     . "\t-h\t\t\tThis help screen.\n"
+    . "\t-c <jarfile>\t\tCreates a screen server instance with the jar.\n"
+    . "\t\t\t\t(Uses -n and -M for screen name and memory.)\n"
     . "\t-E <command>\t\tThe command to run in the event of an error.\n"
     . "\t-m\t\t\tDisplays server memory usage\n"
     . "\t-M <max memory (in B)>\tThe process returns an error if the memory\n"
@@ -27,11 +29,28 @@ print "Minecraft Command, a command-line screen Minecraft server "
     . "\t\t\t\t(Default is \"$screen\")\n" and exit if defined $args{h};
 
 print "Use $0 -h for help...\n" and exit unless defined
-    $args{s} or $args{S} or $args{q} or $args{m} or $args{M} or $args{X};
+    $args{s} or $args{S} or $args{q} or $args{m} or $args{M} or
+    $args{X} or $args{c};
 
 #Arguments
 $screen = $args{n} if defined $args{n};
 my $errorcommand = $args{E} if defined $args{E};
+
+#Creates a new server instance on a screen. Uses the -M max memory and the -n
+#screen name for server settings.
+#@paramater $jarfile <optional> The location of the jarfile to run as
+#                    a server executable. If omitted, a screen
+#                    instance is started without running anything on it.
+sub create_instance
+{
+    (my $jarfile) = @_;
+        print "Server instance started on screen: $screen.\n"
+	    if system("screen -S $screen -d "
+		     . (defined $jarfile?"-m java -jar $jarfile"
+			. (defined $args{M}?" -Xmx$args{M} -Xms$args{M}"
+			   :"")
+			:""));
+}
 
 #Sends a message to the active screen session.
 #@parameter $message Message to send.
@@ -64,10 +83,11 @@ sub check_mem
     return 0;
 }
 
+create_instance($args{c}) if defined $args{c};
 print "Memory: " . get_mem() . "B used...\n" if defined $args{m};
 mine_send("say $args{s}") if defined $args{s} and print "Saying $args{s}...\n";
 mine_send("save-all") if defined $args{S} and print "Saving server...\n";
 mine_send("stop") if defined $args{q} and print "Stopping server...\n";
 mine_send($args{X}) if defined $args{X} and print
     "Sending $args{X} to screen session...\n";
-exit check_mem($args{M}) if defined $args{M};
+exit check_mem($args{M}) if defined $args{M} and not $args{c};
