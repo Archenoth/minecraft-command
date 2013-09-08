@@ -50,11 +50,9 @@ administration tool.
 
 Usage: ./minecraft-command/minecraft-command.pl <arguments>
         -h                      This help screen.
-        -E <command>            The command to run in the event of an
-	error.
+        -E <command>            The command to run in the event of an error.
         -m                      Displays server memory usage
-        -M <max memory (in B)>  The process returns an error if the
-	memory
+        -M <max memory (in B)>  The process returns an error if the memory
                                 usage is larger than the specified
 				value, also
                                 runs a command specified by the -E
@@ -62,10 +60,8 @@ Usage: ./minecraft-command/minecraft-command.pl <arguments>
         -s <message>            Say a message to the server.
         -S                      Saves the server map.
         -q                      Stops the server.
-        -X <command>            Send a custom command to the screen
-	session.
-        -n <screen name>        The screen name that Minecraft is
-	running on
+        -X <command>            Send a custom command to the screen session.
+        -n <screen name>        The screen name that Minecraft is running on
                                 (Default is "minecraft")
 $
 ```
