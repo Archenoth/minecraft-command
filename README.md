@@ -48,15 +48,13 @@ $ ./minecraft-command.pl -h
 Minecraft Command, a command-line screen Minecraft server
 administration tool.
 
-Usage: ./minecraft-command/minecraft-command.pl <arguments>
+Usage: ./minecraft-command.pl <arguments>
         -h                      This help screen.
         -E <command>            The command to run in the event of an error.
         -m                      Displays server memory usage
         -M <max memory (in B)>  The process returns an error if the memory
-                                usage is larger than the specified
-				value, also
-                                runs a command specified by the -E
-				parameter.
+                                usage is larger than the specified value, also
+                                runs a command specified by the -E parameter.
         -s <message>            Say a message to the server.
         -S                      Saves the server map.
         -q                      Stops the server.
