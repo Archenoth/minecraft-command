@@ -45,6 +45,7 @@ Usage: ./minecraft-command.pl <arguments>
                                 (Default is "minecraft")
         -c <jarfile>            Creates a screen server instance with the jar.
                                 (Uses -n and -M for screen name and memory.)
+        -C                      Creates a screen instance. (Uses -n for name.)
 $
 ```
 
@@ -208,6 +209,7 @@ Example:
 ```
 $ ./minecraft-command.pl -C
 Created screen instance on screen: minecraft.
+$
 ```
 This is just a vanilla screen that you can do whatever you want
 with... And sine it is the default name, you can interact with it
@@ -218,6 +220,7 @@ with the "`-n <name>`" parameter.
 ```
 $ ./minecraft-command.pl -C -n derp
 Created screen instance on screen: minecraft.
+$
 ```
 This would create a new screen that can be interacted with
 "`./minecraft-command.pl -n derp <Whatever>`".
