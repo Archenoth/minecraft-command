@@ -48,8 +48,8 @@ sub create_instance
     (my $jarfile) = @_;
     print "Created " . (defined $jarfile?"server":"screen")
 	. " instance on screen: $screen.\n"
-	if system("screen -S $screen -d "
-		  . (defined $jarfile?"-m java -jar $jarfile"
+	if system("screen -S $screen -d -m"
+		  . (defined $jarfile?" java -jar $jarfile"
 		     . (defined $args{M}?" -Xmx$args{M} -Xms$args{M}"
 			:"")
 		     :""));
