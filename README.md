@@ -4,7 +4,7 @@ minecraft-command
 An in-screen Minecraft administration tool.
 
 This script was designed to help in the automation of administration
-of a GNU screen-based Minecraft server instances. It allows one to
+of GNU screen-based Minecraft server instances. It allows one to
 interact with a detached screen with a vanilla minecraft-server.jar
 running in it.
 
