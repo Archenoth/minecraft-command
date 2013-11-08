@@ -197,7 +197,9 @@ parameters.
 In addition, this will actually attempt to download the server
 software if it cannot find it by default, so you can even use
 minecraft-command.pl *without* any working minecraft server software
-on your system.
+on your system. Because of the nature of this parameter and the
+possibility to fail if a network connection doesn't exist, if invoked
+like this, it must be the last paramater to the script.
 
 *Example:*
 ```
