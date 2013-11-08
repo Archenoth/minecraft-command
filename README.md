@@ -178,14 +178,14 @@ give to the JVM, respectively. Running it on its own will use the
 default screen name ("minecraft", which is defined at the top of
 minecraft-command.pl.)
 
-This parameter requires the location of the jar file it will use.
+This parameter can use the location of the jar file it will use.
 
 If you wanna get more creative, you can just create a new screen with
 "`-C`" and then use "`-X`" to do whatever you need to it.
 
 *Example:*
 ```
-$ ./minecraft-command.pl -c /minecraft/minecraft_server.jar
+$ ./minecraft-command.pl -c
 Created server instance on screen: minecraft.
 ```
 
@@ -193,6 +193,19 @@ This is the most basic way to invoke this parameter. It will create a
 server on a new screen with the default name. This means you could
 communicate with it right away using the other `minecraft-command.pl`
 parameters.
+
+In addition, this will actually attempt to download the server
+software if it cannot find it by default, so you can even use
+minecraft-command.pl *without* any working minecraft server software
+on your system.
+
+*Example:*
+```
+$ ./minecraft-command.pl -c /minecraft/minecraft_server.jar
+Created server instance on screen: minecraft.
+```
+
+This will use the file specified by -c as the server JAR to work with.
 
 Or if you wanna specify the memory usage and screen name:
 *Example:*
