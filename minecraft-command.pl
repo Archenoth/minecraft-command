@@ -26,9 +26,11 @@ print "Minecraft Command, a command-line screen Minecraft server "
     . "\t-n <screen name>\tThe screen name that Minecraft is running on\n"
     . "\t\t\t\t(Default is \"$screen\")\n"
     . "\t-c [jarfile]\t\tCreates a screen server instance with the jar.\n"
-    . "\t\t\t\t(Uses -n and -M for screen name and memory, name is optional.)\n"
+    . "\t\t\t\t(Uses -n and -M for screen name and memory, name\n"
+    . "\t\t\t\tis optional.)\n"
     . "\t-C\t\t\tCreates a screen instance. (Uses -n for name.)\n"
-    . "\t-d\t\t\tNegates downloading the server if it doesn't exist already\n"
+    . "\t-d\t\t\tNegates downloading the server if it doesn't\n"
+    . "\t\t\t\texist already\n"
     and exit if defined $args{h};
 
 print "Use $0 -h for help...\n" and exit unless defined
