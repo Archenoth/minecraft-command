@@ -31,24 +31,24 @@ $ ./minecraft-command.pl -h
 Minecraft Command, a command-line screen Minecraft server administration tool.
 
 Usage: ./minecraft-command.pl <arguments>
-	-h			This help screen.
-	-E <command>		The command to run in the event of an error.
-	-m			Displays server memory usage
-	-M <max memory (in B)>	The process returns an error if the memory
-				usage is larger than the specified value, also
-				runs a command specified by the -E parameter.
-	-s <message>		Say a message to the server.
-	-S			Saves the server map.
-	-q			Stops the server.
-	-X <command>		Send a custom command to the screen session.
-	-n <screen name>	The screen name that Minecraft is running on
-				(Default is "minecraft")
-	-c [jarfile]		Creates a screen server instance with the jar.
-				(Uses -n and -M for screen name and memory, name
-				is optional.)
-	-C			Creates a screen instance. (Uses -n for name.)
-	-d			Negates downloading the server if it doesn't
-				exist already
+        -h                      This help screen.
+        -E <command>            The command to run in the event of an error.
+        -m                      Displays server memory usage
+        -M <max memory (in B)>  The process returns an error if the memory
+                                usage is larger than the specified value, also
+                                runs a command specified by the -E parameter.
+        -s <message>            Say a message to the server.
+        -S                      Saves the server map.
+        -q                      Stops the server.
+        -X <command>            Send a custom command to the screen session.
+        -n <screen name>        The screen name that Minecraft is running on
+                                (Default is "minecraft")
+        -c [jarfile]            Creates a screen server instance with the jar.
+                                (Uses -n and -M for screen name and memory, name
+                                is optional.)
+        -C                      Creates a screen instance. (Uses -n for name.)
+        -d                      Negates downloading the server if it doesn't
+                                exist already
 $
 ```
 
