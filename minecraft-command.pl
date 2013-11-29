@@ -34,7 +34,7 @@ print "Minecraft Command, a command-line screen Minecraft server "
     and exit if defined $args{h};
 
 print "Use $0 -h for help...\n" and exit unless defined
-    $args{s} or $args{S} or $args{q} or $args{m} or $args{M} or
+    $args{s} or $args{S} or $args{q} or $args{m} or defined $args{M} or
     $args{X} or exists $args{c} or $args{C};
 
 # Arguments
