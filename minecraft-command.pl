@@ -116,7 +116,7 @@ sub mine_send
 sub get_mem
 {
     foreach(`ps -C java -o rss,command`){
-	return ($_ =~ /^(\d+)\s/)[0] if($_ =~ /minecraft/);
+	return ($_ =~ /^(\d+)\s/)[0] if($_ =~ /minecraft|spigot/);
     }
     print "Cannot find process...\n";
     return 0;
